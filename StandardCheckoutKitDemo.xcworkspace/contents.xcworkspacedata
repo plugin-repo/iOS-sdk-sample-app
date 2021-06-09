@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../CryptoSwift-master/CryptoSwift.xcodeproj">
+      location = "group:../StandardCheckoutKit/StandardCheckoutKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../standard-checkout-kit-ios/StandardCheckoutKit.xcodeproj">
+      location = "group:../CryptoSwift/CryptoSwift.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:StandardCheckoutKiDemo.xcodeproj">

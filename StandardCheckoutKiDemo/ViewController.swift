@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  StandardCheckoutKiDemo
 //
-
-
+//  Created by Vinicius on 09/06/17.
+//  Copyright © 2017 Paymentz. All rights reserved.
 //
 
 import UIKit
@@ -18,18 +18,18 @@ class ViewController: UIViewController, StandardCheckoutDelegate {
   
     @IBAction func pay(_ sender: UIButton) {
         
-        let secureKey = "znOd1gM5iOYeL03kB9v9aXapJXkwmOQn"
+        let secureKey = "bzI93aEQeYDeE50Pa929NiDk3us8XTbU"
         
         let requestParameters = RequestParameters()
-        requestParameters.memberId = "11344"
+        requestParameters.memberId = "10558"
         requestParameters.paymentMode = PaymentMode().cc
-        requestParameters.terminalId = ""
-        requestParameters.merchantTransactionId = "randomnumber265"
+        requestParameters.terminalId = "1106"
+        requestParameters.merchantTransactionId = "randomnumber2699"
         requestParameters.amount = "50.00"
         requestParameters.currency = "USD"
-        requestParameters.toType = "docspartner"
+        requestParameters.toType = "paymentz"
         requestParameters.paymentBrand = PaymentBrand().visa
-        requestParameters.merchantRedirectUrl = "www.merchantredirecturl.com"
+        requestParameters.merchantRedirectUrl = "www.paymentz.com"
         requestParameters.tmplAmount = "50.00"
         requestParameters.tmplCurrency = "USD"
         requestParameters.orderDescription = "Test"
@@ -37,12 +37,12 @@ class ViewController: UIViewController, StandardCheckoutDelegate {
         requestParameters.state = "MH"
         requestParameters.street = "Malad"
         requestParameters.city = "Mumbai"
-        requestParameters.email = "savitha.m@xyz.com"
+        requestParameters.email = "savitha.m@paymentz.com"
         requestParameters.postCode = "400064"
         requestParameters.telnocc = "+91"
         requestParameters.phone = "9096831666"
-        requestParameters.hostUrl = "https://testurl.com/transaction/PayProcessController"
-        
+        requestParameters.hostUrl = "https://preprod.paymentz.com/transaction/Checkout"
+        requestParameters.device = "ios"
         let standardCheckout = StandardCheckout(viewController: self)
         standardCheckout.initPayment(requestParameters: requestParameters, standardCheckoutDelegate: self, secureKey: secureKey)
     }
@@ -50,7 +50,8 @@ class ViewController: UIViewController, StandardCheckoutDelegate {
     // Delegate methods is where you will receive the payment result
     func onSuccess(standardCheckoutResult: StandardCheckoutResult) {
         let resultViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
-        resultViewController.standardCheckoutResult = "Tracking Id: "+standardCheckoutResult.trackingId!+", Amount: "+standardCheckoutResult.amount!+", Description: "+standardCheckoutResult.desc!+", Status: "+standardCheckoutResult.status!+", Descriptor: "+standardCheckoutResult.descriptor!
+        let json = standardCheckoutResult.json
+        resultViewController.standardCheckoutResult = "\(json)"
         let resultNavigationController: UINavigationController = UINavigationController(rootViewController: resultViewController)
         self.present(resultNavigationController, animated: true, completion: nil)
     }
